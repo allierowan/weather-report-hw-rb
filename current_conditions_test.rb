@@ -19,11 +19,11 @@ class CurrentConditionsTest < Minitest::Test
     ).to_return(
       :status => 200,
       :body => File.read("./responses/chevy_chase_conditions.json"),
-      :headers => {}
+      :headers => { 'Content-Type' => 'application/json' }
     )
 
     chevy_chase = CurrentConditions.new.get(20815)
-    assert_equal 59.0, chevy_chase["temp_f"]
+    assert_equal 59.0, chevy_chase["current_observation"]["temp_f"]
 
   end
 
