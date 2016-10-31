@@ -6,13 +6,26 @@ require './weather_alerts'
 def cleanup_time(hr, min)
   if hr.to_i > 12
     pm_hr = hr.to_i - 12
-    "#{pm_hr}:#{min}"
+    "#{pm_hr}:#{min}pm"
   else
-    "#{hr}:#{min}"
+    "#{hr}:#{min}am"
   end
 end
+
+def valid_input?(input)
+  input.length == 5 && is_numeric?(input)
+end
+
+def is_numeric?(input)
+  input.to_i.to_s == input || input.to_f.to_s == input
+end
+
 puts "Welcome to this chill weather app. Please enter a 5 digit zip code of the city you would like to know about"
-input_zip = gets.chomp.to_i
+input_zip = gets.chomp
+until valid_input?(input_zip)
+  puts "You did not input a valid zip code. Please try again"
+  input_zip = gets.chomp
+end
 city = CurrentConditions.new.requested_city(input_zip)
 weather = CurrentConditions.new.weather(input_zip)
 temp = CurrentConditions.new.temp(input_zip)
@@ -39,6 +52,6 @@ else
   end
 end
 puts "The Ten Day Forecast for #{city} is: "
-(0..19).to_a.each do |day|
-  puts TenDayForecast.new.weather_by_day(input_zip, day)[:time] + ": " + TenDayForecast.new.weather_by_day(input_zip, day)[:desc]
+TenDayForecast.new.all_ten_days(input_zip).each do |k,v|
+  puts "#{v[0]}: #{v[1]}"
 end

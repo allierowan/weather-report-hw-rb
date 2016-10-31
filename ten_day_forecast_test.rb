@@ -36,4 +36,10 @@ class TenDayForecastTest < Minitest::Test
     assert_equal array, TenDayForecast.new.weather_by_day(20815, 2)
   end
 
+  def test_get_weather_all_days
+    stub_redirect
+    assert_equal "Cloudy. High near 60F. Winds SSE at 5 to 10 mph.", TenDayForecast.new.all_ten_days(20815)[2][1]
+    # p TenDayForecast.new.all_ten_days(20815)
+  end
+
 end
