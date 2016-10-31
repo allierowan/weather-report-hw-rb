@@ -11,7 +11,10 @@ class TenDayForecast
   end
 
   def weather_by_day(zip, day)
-    get(zip)["forecast"]["txt_forecast"]["forecastday"][day]["fcttext"]
+    {
+      desc: get(zip)["forecast"]["txt_forecast"]["forecastday"][day]["fcttext"],
+      time: get(zip)["forecast"]["txt_forecast"]["forecastday"][day]["title"]
+    }
   end
 
 end

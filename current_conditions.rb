@@ -24,5 +24,3 @@ class CurrentConditions
   end
 
 end
-binding.pry
-puts "finished!"
