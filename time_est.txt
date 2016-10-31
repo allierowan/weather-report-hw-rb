@@ -1,7 +1,16 @@
 Normal Mode:
 
-- Create classes and tests to get various bits of information from the API
+Estimated
+- Create classes and tests to get various bits of information from the API (2.5 hrs total)
   - Current conditions at that location. 1
+  - 10 day forecast for that location. .5
+  - Sunrise and sunset times. .5
+  - Any current weather alerts. .5
+- Create a file that allows the user to interact with the program through cli .5
+
+Actual
+- Create classes and tests to get various bits of information from the API (2 hrs total)
+  - Current conditions at that location. .5
   - 10 day forecast for that location. .5
   - Sunrise and sunset times. .5
   - Any current weather alerts. .5

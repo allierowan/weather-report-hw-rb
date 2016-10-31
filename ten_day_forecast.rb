@@ -7,7 +7,7 @@ class TenDayForecast
   API_KEY = ENV["WUNDERGROUND_KEY"]
 
   def get(zip)
-    HTTParty.get("#{BASE_URI}#{API_KEY}/forecast10day/q/#{zip}")
+    HTTParty.get("#{BASE_URI}#{API_KEY}/forecast10day/q/#{zip}.json")
   end
 
   def weather_by_day(zip, day)

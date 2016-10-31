@@ -11,7 +11,7 @@ class TenDayForecastTest < Minitest::Test
   def stub_redirect
     stub_request(
       :get,
-      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/forecast10day/q/20815"
+      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/forecast10day/q/20815.json"
     ).to_return(
       :status => 200,
       :body => File.read("./responses/chevy_chase_10day.json"),

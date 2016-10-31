@@ -7,7 +7,7 @@ class Astronomy
   API_KEY = ENV["WUNDERGROUND_KEY"]
 
   def get(zip)
-    HTTParty.get("#{BASE_URI}#{API_KEY}/astronomy/q/#{zip}")
+    HTTParty.get("#{BASE_URI}#{API_KEY}/astronomy/q/#{zip}.json")
   end
 
   def time_of_sunrise(zip)

@@ -8,7 +8,7 @@ class CurrentConditions
   API_KEY = ENV["WUNDERGROUND_KEY"]
 
   def get(zip)
-    HTTParty.get("#{BASE_URI}#{API_KEY}/conditions/q/#{zip}")
+      HTTParty.get("#{BASE_URI}#{API_KEY}/conditions/q/#{zip}.json")
   end
 
   def temp(zip)
@@ -24,3 +24,5 @@ class CurrentConditions
   end
 
 end
+binding.pry
+puts "finished!"

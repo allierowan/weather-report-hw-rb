@@ -11,7 +11,7 @@ class WeatherAlertsTest < Minitest::Test
   def stub_redirect
     stub_request(
       :get,
-      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/alerts/q/59261"
+      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/alerts/q/59261.json"
     ).to_return(
       :status => 200,
       :body => File.read("./responses/montana_alerts.json"),

@@ -7,7 +7,7 @@ class WeatherAlerts
   API_KEY = ENV["WUNDERGROUND_KEY"]
 
   def get(zip)
-    HTTParty.get("#{BASE_URI}#{API_KEY}/alerts/q/#{zip}")
+    HTTParty.get("#{BASE_URI}#{API_KEY}/alerts/q/#{zip}.json")
   end
 
   def all_alerts(zip)
