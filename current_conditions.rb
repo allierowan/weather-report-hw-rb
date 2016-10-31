@@ -12,18 +12,15 @@ class CurrentConditions
   end
 
   def temp(zip)
-    cond_json = HTTParty.get("#{BASE_URI}#{API_KEY}/conditions/q/#{zip}")
-    cond_json["current_observation"]["temp_f"]
+    get(zip)["current_observation"]["temp_f"]
   end
 
   def requested_city(zip)
-    cond_json = HTTParty.get("#{BASE_URI}#{API_KEY}/conditions/q/#{zip}")
-    cond_json["current_observation"]["display_location"]["full"]
+    get(zip)["current_observation"]["display_location"]["full"]
   end
 
   def weather(zip)
-    cond_json = HTTParty.get("#{BASE_URI}#{API_KEY}/conditions/q/#{zip}")
-    cond_json["current_observation"]["weather"]
+    get(zip)["current_observation"]["weather"]
   end
 
 end
