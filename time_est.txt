@@ -14,4 +14,4 @@ Actual
   - 10 day forecast for that location. .5
   - Sunrise and sunset times. .5
   - Any current weather alerts. .5
-- Create a file that allows the user to interact with the program through cli .5
+- Create a file that allows the user to interact with the program through cli 1.5
