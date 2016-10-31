@@ -10,4 +10,8 @@ class TenDayForecast
     HTTParty.get("#{BASE_URI}#{API_KEY}/forecast10day/q/#{zip}")
   end
 
+  def weather_by_day(zip, day)
+    get(zip)["forecast"]["txt_forecast"]["forecastday"][day]["fcttext"]
+  end
+
 end
