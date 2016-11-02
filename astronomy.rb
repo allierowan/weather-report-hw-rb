@@ -1,21 +1,20 @@
 require 'bundler/setup'
 require 'httparty'
 require 'pry'
+require_relative 'wu_api'
 
-class Astronomy
-  BASE_URI = "http://api.wunderground.com/api/"
-  API_KEY = ENV["WUNDERGROUND_KEY"]
+class Astronomy < WuAPI
 
-  def get(zip)
-    HTTParty.get("#{BASE_URI}#{API_KEY}/astronomy/q/#{zip}.json")
+  def feature
+    "astronomy"
   end
 
-  def time_of_sunrise(zip)
-    { hour: get(zip)["sun_phase"]["sunrise"]["hour"], minute: get(zip)["sun_phase"]["sunrise"]["minute"] }
+  def time_of_sunrise
+    { hour: data["sun_phase"]["sunrise"]["hour"], minute: data["sun_phase"]["sunrise"]["minute"] }
   end
 
-  def time_of_sunset(zip)
-    { hour: get(zip)["sun_phase"]["sunset"]["hour"], minute: get(zip)["sun_phase"]["sunset"]["minute"] }
+  def time_of_sunset
+    { hour: data["sun_phase"]["sunset"]["hour"], minute: data["sun_phase"]["sunset"]["minute"] }
   end
 
 end
