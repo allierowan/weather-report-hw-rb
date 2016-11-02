@@ -25,13 +25,13 @@ class WeatherAlertsTest < Minitest::Test
 
   def test_get_alerts
     stub_redirect
-    alerts = WeatherAlerts.new.get(59261)
-    assert_equal "WND", alerts["alerts"][0]["type"]
+    alerts = WeatherAlerts.new(59261)
+    assert_equal "WND", alerts.data["alerts"][0]["type"]
   end
 
   def test_get_array_of_alerts
     stub_redirect
-    assert_equal ["Lake Wind Advisory"], WeatherAlerts.new.all_alerts(59261)
+    assert_equal ["Lake Wind Advisory"], WeatherAlerts.new(59261).all_alerts
   end
 
 end

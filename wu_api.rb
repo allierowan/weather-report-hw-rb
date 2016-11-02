@@ -1,3 +1,7 @@
+require 'bundler/setup'
+require 'httparty'
+require 'pry'
+
 class WuAPI
   attr_reader :zip, :data
 

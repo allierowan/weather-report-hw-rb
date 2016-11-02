@@ -1,18 +1,14 @@
-require 'bundler/setup'
-require 'httparty'
-require 'pry'
+require_relative 'wu_api'
 
-class WeatherAlerts
-  BASE_URI = "http://api.wunderground.com/api/"
-  API_KEY = ENV["WUNDERGROUND_KEY"]
+class WeatherAlerts < WuAPI
 
-  def get(zip)
-    HTTParty.get("#{BASE_URI}#{API_KEY}/alerts/q/#{zip}.json")
+  def feature
+    "alerts"
   end
 
-  def all_alerts(zip)
+  def all_alerts
     all_alerts = []
-    get(zip)["alerts"].each do |alert|
+    data["alerts"].each do |alert|
       all_alerts << alert["description"]
     end
     all_alerts

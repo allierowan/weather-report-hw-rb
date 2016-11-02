@@ -1,6 +1,3 @@
-require 'bundler/setup'
-require 'httparty'
-require 'pry'
 require_relative 'wu_api'
 
 class CurrentConditions < WuAPI
