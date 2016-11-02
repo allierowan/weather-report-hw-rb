@@ -24,7 +24,6 @@ class AstronomyTest < Minitest::Test
 
   def test_get_astronomy
     stub_the_thing
-
     chevy_chase = Astronomy.new(20815)
     assert_equal "7", chevy_chase.data["sun_phase"]["sunrise"]["hour"]
   end

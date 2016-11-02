@@ -22,8 +22,8 @@ class CurrentConditionsTest < Minitest::Test
       :headers => { 'Content-Type' => 'application/json' }
     )
 
-    chevy_chase = CurrentConditions.new.get(20815)
-    assert_equal 59.0, chevy_chase["current_observation"]["temp_f"]
+    chevy_chase = CurrentConditions.new(20815)
+    assert_equal 59.0, chevy_chase.data["current_observation"]["temp_f"]
   end
 
   def test_get_current_temp
@@ -35,7 +35,7 @@ class CurrentConditionsTest < Minitest::Test
       :body => File.read("./responses/chevy_chase_conditions.json"),
       :headers => { 'Content-Type' => 'application/json' }
     )
-    assert_equal 59.0, CurrentConditions.new.temp(20815)
+    assert_equal 59.0, CurrentConditions.new(20815).temp
   end
 
   def test_requested_city
@@ -47,7 +47,7 @@ class CurrentConditionsTest < Minitest::Test
       :body => File.read("./responses/chevy_chase_conditions.json"),
       :headers => { 'Content-Type' => 'application/json' }
     )
-    assert_equal "Chevy Chase, MD", CurrentConditions.new.requested_city(20815)
+    assert_equal "Chevy Chase, MD", CurrentConditions.new(20815).requested_city
   end
 
   def test_get_weather_desc
@@ -59,7 +59,7 @@ class CurrentConditionsTest < Minitest::Test
       :body => File.read("./responses/chevy_chase_conditions.json"),
       :headers => { 'Content-Type' => 'application/json' }
     )
-    assert_equal "Clear", CurrentConditions.new.weather(20815)
+    assert_equal "Clear", CurrentConditions.new(20815).weather
   end
 
 end

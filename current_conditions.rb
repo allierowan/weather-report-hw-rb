@@ -1,26 +1,24 @@
 require 'bundler/setup'
 require 'httparty'
 require 'pry'
+require_relative 'wu_api'
 
-class CurrentConditions
+class CurrentConditions < WuAPI
 
-  BASE_URI = "http://api.wunderground.com/api/"
-  API_KEY = ENV["WUNDERGROUND_KEY"]
-
-  def get(zip)
-      HTTParty.get("#{BASE_URI}#{API_KEY}/conditions/q/#{zip}.json")
+  def feature
+    "conditions"
   end
 
-  def temp(zip)
-    get(zip)["current_observation"]["temp_f"]
+  def temp
+    data["current_observation"]["temp_f"]
   end
 
-  def requested_city(zip)
-    get(zip)["current_observation"]["display_location"]["full"]
+  def requested_city
+    data["current_observation"]["display_location"]["full"]
   end
 
-  def weather(zip)
-    get(zip)["current_observation"]["weather"]
+  def weather
+    data["current_observation"]["weather"]
   end
 
 end
