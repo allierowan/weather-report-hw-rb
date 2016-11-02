@@ -6,7 +6,9 @@ require 'webmock/minitest'
 require 'active_support'
 require 'active_support/core_ext'
 
+
 class AstronomyTest < Minitest::Test
+
   def setup
     stub_request(
       :get,
