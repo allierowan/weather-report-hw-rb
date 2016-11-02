@@ -52,4 +52,11 @@ class AstronomyTest < Minitest::Test
     Astronomy.new("20815").data
     assert ::WeatherData.find_by(locale: "20815", feature: "astronomy")
   end
+
+  def test_data_checks_db_before_api
+    ::WeatherData.create!(locale: "20815", feature: "astronomy", api_data: JSON.parse(File.read("responses/chevy_chase_astronomy_other.json")))
+    time_hash = {hour: "8", minute: "08"}
+    assert_equal time_hash, Astronomy.new("20815").time_of_sunset
+  end
+
 end

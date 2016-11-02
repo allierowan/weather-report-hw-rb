@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'httparty'
 require 'pry'
 require 'active_support'
+require 'json'
 
 class WuAPI
   attr_reader :zip, :locale
