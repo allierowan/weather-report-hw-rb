@@ -1,10 +1,11 @@
 require 'bundler/setup'
 require 'httparty'
 require 'pry'
+require 'active_support'
 
 class WuAPI
-  attr_reader :zip, :data, :locale
-  attr_accessor :locale_endpoint
+  attr_reader :zip, :locale
+  attr_accessor :locale_endpoint, :data
 
   BASE_URI = "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}"
 
@@ -22,7 +23,15 @@ class WuAPI
   end
 
   def data
-    @data ||= HTTParty.get("#{BASE_URI}/#{feature}/q/#{locale_endpoint}.json")
+
+    if ::WeatherData.where(locale: locale, feature: feature, created_at: ((Time.now - 3600)..Time.now)).size > 0
+      @data = ::WeatherData.find_by(locale: locale, feature: feature).api_data
+    else
+      @data ||= HTTParty.get("#{BASE_URI}/#{feature}/q/#{locale_endpoint}.json").parsed_response
+      ::WeatherData.create!(locale: locale, locale_endpoint: locale_endpoint, feature: feature, api_data: @data)
+      return @data
+    end
+
   end
 
   def feature

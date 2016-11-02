@@ -5,6 +5,7 @@ require 'webmock/minitest'
 
 require 'active_support'
 require 'active_support/core_ext'
+require 'pry'
 
 
 class WeatherDataTest < Minitest::Test
@@ -20,6 +21,11 @@ class WeatherDataTest < Minitest::Test
 
   def test_class_exists
     assert WeatherData
+  end
+
+  def test_can_create_data
+    weather = WeatherData.create!(locale: "20815", feature: "this")
+    assert_equal weather, WeatherData.first
   end
 
 end
