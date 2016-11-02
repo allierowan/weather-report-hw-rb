@@ -13,7 +13,7 @@ def cleanup_time(hr, min)
 end
 
 def valid_input?(input)
-  input.length == 5 && is_numeric?(input)
+  input.length == 5 && is_numeric?(input) || input.match(/\A[a-zA-Z]+\ ?[a-zA-Z]*\,\ [a-zA-Z]{2}\z/)
 end
 
 def is_numeric?(input)
@@ -26,18 +26,18 @@ until valid_input?(input_zip)
   puts "You did not input a valid zip code. Please try again"
   input_zip = gets.chomp
 end
-city = CurrentConditions.new.requested_city(input_zip)
-weather = CurrentConditions.new.weather(input_zip)
-temp = CurrentConditions.new.temp(input_zip)
+city = CurrentConditions.new(input_zip).requested_city
+weather = CurrentConditions.new(input_zip).weather
+temp = CurrentConditions.new(input_zip).temp
 
-sunrise_hr = Astronomy.new.time_of_sunrise(input_zip)[:hour]
-sunrise_min = Astronomy.new.time_of_sunrise(input_zip)[:minute]
+sunrise_hr = Astronomy.new(input_zip).time_of_sunrise[:hour]
+sunrise_min = Astronomy.new(input_zip).time_of_sunrise[:minute]
 sunrise_time = cleanup_time(sunrise_hr, sunrise_min)
-sunset_hr = Astronomy.new.time_of_sunset(input_zip)[:hour]
-sunset_min = Astronomy.new.time_of_sunset(input_zip)[:minute]
+sunset_hr = Astronomy.new(input_zip).time_of_sunset[:hour]
+sunset_min = Astronomy.new(input_zip).time_of_sunset[:minute]
 sunset_time = cleanup_time(sunset_hr, sunset_min)
 
-all_alerts = WeatherAlerts.new.all_alerts(input_zip)
+all_alerts = WeatherAlerts.new(input_zip).all_alerts
 
 puts "#{city}
 Weather: It is currently #{temp} degrees fahrenheit and #{weather}."
@@ -52,6 +52,6 @@ else
   end
 end
 puts "The Ten Day Forecast for #{city} is: "
-TenDayForecast.new.all_ten_days(input_zip).each do |k,v|
+TenDayForecast.new(input_zip).all_ten_days.each do |k,v|
   puts "#{v[0]}: #{v[1]}"
 end
