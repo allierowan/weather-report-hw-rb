@@ -12,7 +12,7 @@ class CurrentConditionsTest < Minitest::Test
     assert CurrentConditions
   end
 
-  def test_can_get_current_conditions
+  def setup
     stub_request(
       :get,
       "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/conditions/q/20815.json"
@@ -21,44 +21,23 @@ class CurrentConditionsTest < Minitest::Test
       :body => File.read("./responses/chevy_chase_conditions.json"),
       :headers => { 'Content-Type' => 'application/json' }
     )
+  end
+
+  def test_can_get_current_conditions
 
     chevy_chase = CurrentConditions.new(20815)
     assert_equal 59.0, chevy_chase.data["current_observation"]["temp_f"]
   end
 
   def test_get_current_temp
-    stub_request(
-      :get,
-      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/conditions/q/20815.json"
-    ).to_return(
-      :status => 200,
-      :body => File.read("./responses/chevy_chase_conditions.json"),
-      :headers => { 'Content-Type' => 'application/json' }
-    )
     assert_equal 59.0, CurrentConditions.new(20815).temp
   end
 
   def test_requested_city
-    stub_request(
-      :get,
-      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/conditions/q/20815.json"
-    ).to_return(
-      :status => 200,
-      :body => File.read("./responses/chevy_chase_conditions.json"),
-      :headers => { 'Content-Type' => 'application/json' }
-    )
     assert_equal "Chevy Chase, MD", CurrentConditions.new(20815).requested_city
   end
 
   def test_get_weather_desc
-    stub_request(
-      :get,
-      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/conditions/q/20815.json"
-    ).to_return(
-      :status => 200,
-      :body => File.read("./responses/chevy_chase_conditions.json"),
-      :headers => { 'Content-Type' => 'application/json' }
-    )
     assert_equal "Clear", CurrentConditions.new(20815).weather
   end
 
