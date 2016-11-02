@@ -40,4 +40,16 @@ class CurrentConditionsTest < Minitest::Test
     assert_equal "Clear", CurrentConditions.new(20815).weather
   end
 
+  def test_get_weather_for_city_state
+    stub_request(
+      :get,
+      "http://api.wunderground.com/api/#{ENV["WUNDERGROUND_KEY"]}/conditions/q/MD/Chevy_Chase.json"
+    ).to_return(
+      :status => 200,
+      :body => File.read("./responses/chevy_chase_conditions.json"),
+      :headers => { 'Content-Type' => 'application/json' }
+    )
+    assert_equal "Chevy Chase, MD", CurrentConditions.new("Chevy Chase, MD").requested_city
+  end
+
 end
