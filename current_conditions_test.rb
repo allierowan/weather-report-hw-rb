@@ -24,7 +24,6 @@ class CurrentConditionsTest < Minitest::Test
   end
 
   def test_can_get_current_conditions
-
     chevy_chase = CurrentConditions.new(20815)
     assert_equal 59.0, chevy_chase.data["current_observation"]["temp_f"]
   end
